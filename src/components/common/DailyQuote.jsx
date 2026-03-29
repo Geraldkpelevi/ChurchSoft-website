@@ -46,7 +46,7 @@ export default function DailyQuote() {
 
         // Re-enable transition for next slides
         setTimeout(() => setIsTransitioning(true), 50);
-      }, 700); // match transition duration
+      }, 700); 
 
       return () => clearTimeout(timeout);
     }

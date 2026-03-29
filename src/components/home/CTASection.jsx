@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default function CTASection() {
   return (
     <section className="py-20 px-6 sm:px-12 bg-blue-50 text-blue-600">
@@ -22,9 +22,11 @@ export default function CTASection() {
             Join Now
           </button>
 
+          <Link to="/contact">
           <button className="border border-blue-900 hover:bg-white hover:text-blue-900 text-blue-900 font-semibold px-6 py-3 rounded-md">
             Contact Us
           </button>
+          </Link>
         </div>
 
       </div>

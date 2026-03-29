@@ -128,6 +128,8 @@ export const churchData = {
     ],
   },
 
+  flyers: ["/GCCI 1.jpeg", "/GCCI 2.jpeg", "/GCCI 3.jpeg", "/GCCI4.jpeg", "/GCCI 5.jpeg"],
+
   events: [
     { month: "January", activity: "Praying into the new year" },
     { month: "February", activity: "Mission fund raising" },

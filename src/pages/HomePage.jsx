@@ -1,11 +1,11 @@
+import ChurchesNearby from "../components/common/ChurchesNearby";
+import DailyQuote from "../components/common/DailyQuote";
 import AboutSection from "../components/home/AboutSection";
 import CTASection from "../components/home/CTASection";
-// import EventsPreview from "../components/home/EventsPreview";
 import Hero from "../components/home/Hero";
 import LeadershipPreview from "../components/home/LeadershipPreview";
 import News from "../components/home/News";
-import DailyQuote from "../components/common/DailyQuote";
-import ChurchesNearby from "../components/common/ChurchesNearby";
+import UpcomingEvents from "./UpcomingEventsPage";
 
 export default function HomePage() {
   return (
@@ -14,10 +14,10 @@ export default function HomePage() {
       <AboutSection />
       <LeadershipPreview />
       <News />
-      {/* <EventsPreview /> */}
-      <DailyQuote />
+      <UpcomingEvents />
       <CTASection />
       <ChurchesNearby />
+      <DailyQuote />
     </main>
   );
 }

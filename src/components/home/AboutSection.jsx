@@ -1,4 +1,4 @@
-import { churchData } from "../../data/churchData";
+import { churchData } from "../../data/churchData.js";
 
 export default function AboutSection() {
   return (

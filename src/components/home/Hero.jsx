@@ -11,7 +11,7 @@ export default function Hero() {
       }}
     >
       {/* Overlay (important for readability) */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-12 py-30 flex flex-col items-center justify-center gap-8">
         {/* Hero Content */}
@@ -48,11 +48,15 @@ export default function Hero() {
             PM — Join our Youth Fellowship every Friday at 7:00 PM — Be part of
             our mission and outreach programs!
           </p>
+          
         </div>
       </div>
       {/* Tailwind CSS animation */}
       <style jsx>{`
         @keyframes marquee {
+         100% {
+            transform: translateX(-100vw);
+          }
           0% {
             transform: translateX(100vw);
           }

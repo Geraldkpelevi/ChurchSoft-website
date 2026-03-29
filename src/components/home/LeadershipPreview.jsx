@@ -15,7 +15,7 @@ export default function LeadershipPreview() {
               src={leader.image}
               alt={leader.name}
               className="w-full h-40 object-cover rounded-xl mb-4"
-            />  
+            />
             <h3 className="font-semibold">{leader.name}</h3>
             <p className="text-gray-500">{leader.position}</p>
           </div>

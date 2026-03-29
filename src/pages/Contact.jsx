@@ -1,12 +1,10 @@
 import ContactInfo from "../components/contact/ContactInfo";
 import ContactForm from "../components/contact/ContactForm";
 import MapSection from "../components/contact/MapSection";
-import Navbar from "../components/layouts/Navbar";
 
 export default function Contact() {
   return (
     <>
-    <Navbar />
     <section className="py-10 px-6 sm:px-12  bg-gray-50">
         
       <div className="max-w-6xl mx-auto">
