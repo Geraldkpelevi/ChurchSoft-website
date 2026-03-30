@@ -5,7 +5,6 @@ import CTASection from "../components/home/CTASection";
 import Hero from "../components/home/Hero";
 import LeadershipPreview from "../components/home/LeadershipPreview";
 import TrendingNews from "../components/home/TrendingNews";
-import UpcomingEvents from "./NewsPage";
 
 export default function HomePage() {
   return (
@@ -14,7 +13,6 @@ export default function HomePage() {
       <AboutSection />
       <LeadershipPreview />
       <TrendingNews />
-      <UpcomingEvents />
       <CTASection />
       <ChurchesNearby />
       <DailyQuote />

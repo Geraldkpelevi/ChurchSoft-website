@@ -31,7 +31,7 @@ export default function DailyQuote() {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => prev + 1);
       setIsTransitioning(true);
-    }, 6000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, []);

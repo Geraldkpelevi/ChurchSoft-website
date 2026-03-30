@@ -14,10 +14,10 @@ export default function Navbar() {
     { name: "About", path: "/about" },
     { name: "Leadership", path: "/leadership" },
     {
-      name: "News & Updates",
+      name: "News & Events",
       dropdown: [
-        { name: "News", path: "/events/upcoming" },
-        { name: "Updates", path: "/events/past" },
+        { name: "News", path: "/news" },
+        { name: "Events", path: "/events" },
       ],
     },
     {

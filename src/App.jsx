@@ -9,7 +9,7 @@ import HomePage from "./pages/HomePage.jsx";
 import LeadershipPage from "./pages/LeadershipPage";
 import NewsPage from "./pages/NewsPage.jsx";
 import NotFound from "./pages/NotFound";
-import UpdatesPage from "./pages/UpdatesPage.jsx";
+import EventsPage from "./pages/EventsPage.jsx";
 
 function App() {
   return (
@@ -24,8 +24,8 @@ function App() {
         <Route path="leadership" element={<LeadershipPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mapSection" element={<MapSection />} />
-        <Route path="/events/upcoming" element={<NewsPage />} />
-        <Route path="/events/past" element={<UpdatesPage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/events" element={<EventsPage />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

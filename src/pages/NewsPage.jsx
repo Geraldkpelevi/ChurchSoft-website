@@ -1,32 +1,21 @@
-import EventCard from "../components/common/EventCard";
-import FlyerSlider from "../components/common/FlyerSlider";
+import React from "react";
+import NewsCard from "../components/common/NewsCard";
 import { churchData } from "../data/churchData";
 
-export default function NewsPage() {
-  const events = (churchData.events || []).filter(
-    (event) => new Date(event.date) >= new Date(),
-  );
+function NewsPage() {
 
-  const flyers = churchData.flyers || [];
 
   return (
-    <>
-      <div className="py-10 bg-gray-50 ">
-        <div className="w-full px-10">
-          <h1 className="text-4xl font-bold mb-10 text-blue-600 text-center">
-            Upcoming Events
-          </h1>
-
-          {/* SLIDER GOES HERE */}
-          <FlyerSlider flyers={flyers} interval={3000} />
-
-          <div >
-            {events.map((event, idx) => (
-              <EventCard key={idx} {...event} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
+    <section className="bg-[#001866] py-16 px-6">
+      <h1 className="text-white text-4xl text-center mb-20 font-[Playfair Display] font-semibold">Trending News</h1>
+      {/* Cards */}
+      <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {churchData.newsData.map((item, index) => (
+          <NewsCard key={index} {...item} />
+        ))}
+      </div>  
+    </section>
   );
 }
+
+export default NewsPage;

@@ -2,7 +2,7 @@ import React from "react";
 import EventCard from "../components/common/EventCard";
 import { churchData } from "../data/churchData";
 
-export default function UpdatesPage() {
+export default function EventsPage() {
   const events = (churchData.events || []).filter(
     (event) => new Date(event.date) < new Date()
   );
@@ -12,12 +12,12 @@ export default function UpdatesPage() {
     <div className="py-12 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold mb-8 text-center">
-          Updates
+          Events
         </h1>
 
         {events.length === 0 ? (
           <p className="text-center text-gray-500">
-            No updates available.
+            No Events available.
           </p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
