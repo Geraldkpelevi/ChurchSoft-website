@@ -43,7 +43,7 @@ export default function Hero() {
       </div>
       <div className="w-full overflow-hidden mb-2 pb-2">
         <div className="animate-marquee whitespace-nowrap">
-          <p className="inline-block text-lg text-amber-300 ">
+          <p className="inline-block text-2xl  text-amber-300 ">
             📢 Sunday Worship: 9:00 AM & 11:30 AM — Wednesday Bible Study: 6:00
             PM — Join our Youth Fellowship every Friday at 7:00 PM — Be part of
             our mission and outreach programs!

@@ -31,7 +31,7 @@ export default function DailyQuote() {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => prev + 1);
       setIsTransitioning(true);
-    }, 3000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, []);
@@ -46,7 +46,7 @@ export default function DailyQuote() {
 
         // Re-enable transition for next slides
         setTimeout(() => setIsTransitioning(true), 50);
-      }, 700); 
+      }, 800); 
 
       return () => clearTimeout(timeout);
     }
@@ -65,7 +65,7 @@ export default function DailyQuote() {
 
       <div className="max-w-4xl mx-auto relative overflow-hidden">
         <div
-          className={`flex ${isTransitioning ? "transition-transform duration-700" : ""}`}
+          className={`flex ${isTransitioning ? "transition-transform duration-800" : ""}`}
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
           }}
