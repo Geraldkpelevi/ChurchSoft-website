@@ -7,11 +7,11 @@ export default function AboutSection() {
         
         {/* Text Content */}
         <div className="font-stretch-50%">
-          <h2 className="text-4xl font-bold mb-4 text-blue-900 font-[Montserrat]">
+          <h2 className="text-4xl font-bold mb-4 text-blue-900 font-[Playfair Display]">
             Great Commission Church International (G.C.C.I)
           </h2>
 
-          <p className="text-gray-600 mb-4 font-[Roboto]">
+          <p className="text-gray-600 mb-4 font-[Lato]">
             Great Commission Church International <i className="text-blue-700">(G.C.C.I)</i> is a Christ-centered
             ministry committed to raising disciples across all nations, tribes,
             and people groups. Our focus is on building believers who reflect

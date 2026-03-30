@@ -61,7 +61,7 @@ export default function Navbar() {
     <nav className="w-full bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <div className="text-lg font-bold text-blue-600 ml-6">
-          <img src="/logo.png" alt="Logo" className="h-20 20" />
+          <img src="/images/logo.png" alt="Logo" className="h-20 20" />
         </div>
 
         {/* Desktop Menu */}

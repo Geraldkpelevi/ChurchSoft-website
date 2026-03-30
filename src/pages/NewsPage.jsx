@@ -20,7 +20,7 @@ export default function NewsPage() {
           {/* SLIDER GOES HERE */}
           <FlyerSlider flyers={flyers} interval={3000} />
 
-          <div className="border-t border-red-500">
+          <div >
             {events.map((event, idx) => (
               <EventCard key={idx} {...event} />
             ))}

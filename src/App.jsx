@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import HomePage from "./pages/HomePage.jsx";
 import LeadershipPage from "./pages/LeadershipPage";
 import NewsPage from "./pages/NewsPage.jsx";
+import NotFound from "./pages/NotFound";
 import UpdatesPage from "./pages/UpdatesPage.jsx";
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
         <Route path="/events/upcoming" element={<NewsPage />} />
         <Route path="/events/past" element={<UpdatesPage />} />
       </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
