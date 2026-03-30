@@ -6,7 +6,7 @@ export default function LeadershipPreview() {
 
   return (
     <section className="py-16 px-6 text-center">
-      <h2 className="text-3xl font-bold mb-10">Our Leadership</h2>
+      <h2 className="text-3xl font-bold mb-10 font-[Playfair Display] text-blue-600">Our Leadership</h2>
 
       <div className="grid md:grid-cols-4 gap-6 mb-15">
         {leaders.map((leader, index) => (
@@ -23,7 +23,7 @@ export default function LeadershipPreview() {
       </div>
       <Link
         to="/leadership"
-        className="border mt-40 border-gray-200 text-blue-500 px-6 py-3 rounded-lg hover:bg-white hover:text-black transition"
+        className="border mt-40 border-gray-200 text-blue-500 px-6 py-3 rounded-lg hover:text-white hover:font-semibold hover:bg-blue-700 transition"
       >
         View All
       </Link>

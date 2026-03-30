@@ -6,7 +6,7 @@ export default function CTASection() {
       <div className="max-w-4xl mx-auto text-center">
         
         {/* Title */}
-        <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6 font-[Playfair Display]">
           Get Involved Today
         </h2>
 

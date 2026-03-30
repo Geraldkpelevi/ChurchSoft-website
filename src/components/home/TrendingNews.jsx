@@ -1,7 +1,7 @@
 import React from "react";
 import NewsCard from "../common/NewsCard";
 
-function News() {
+function TrendingNews() {
   const newsData = [
   {
     image: "https://gna.org.gh/web/wp-content/uploads/2025/12/IMG-20251226-WA0008.jpg",
@@ -33,7 +33,7 @@ function News() {
 
   return (
     <section className="bg-[#001866] py-16 px-6">
-      <h1 className="text-white text-4xl text-center mb-20">Trending News</h1>
+      <h1 className="text-white text-4xl text-center mb-20 font-[Playfair Display] font-semibold">Trending News</h1>
       {/* Cards */}
       <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {newsData.map((item, index) => (
@@ -51,4 +51,4 @@ function News() {
   );
 }
 
-export default News;
+export default TrendingNews;

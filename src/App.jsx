@@ -7,8 +7,8 @@ import AboutPage from "./pages/AboutPage.jsx";
 import Contact from "./pages/Contact";
 import HomePage from "./pages/HomePage.jsx";
 import LeadershipPage from "./pages/LeadershipPage";
-import PastEvents from "./pages/PastEventsPage.jsx";
-import UpcomingEvents from "./pages/UpcomingEventsPage.jsx";
+import NewsPage from "./pages/NewsPage.jsx";
+import UpdatesPage from "./pages/UpdatesPage.jsx";
 
 function App() {
   return (
@@ -23,8 +23,8 @@ function App() {
         <Route path="leadership" element={<LeadershipPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mapSection" element={<MapSection />} />
-        <Route path="/events/upcoming" element={<UpcomingEvents />} />
-        <Route path="/events/past" element={<PastEvents />} />
+        <Route path="/events/upcoming" element={<NewsPage />} />
+        <Route path="/events/past" element={<UpdatesPage />} />
       </Route>
     </Routes>
   );

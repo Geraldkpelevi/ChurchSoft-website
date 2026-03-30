@@ -16,8 +16,8 @@ export default function Navbar() {
     {
       name: "News & Updates",
       dropdown: [
-        { name: "Upcoming Events", path: "/events/upcoming" },
-        { name: "Past Events", path: "/events/past" },
+        { name: "News", path: "/events/upcoming" },
+        { name: "Updates", path: "/events/past" },
       ],
     },
     {

@@ -16,7 +16,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-6 sm:px-12 py-30 flex flex-col items-center justify-center gap-8">
         {/* Hero Content */}
         <div>
-          <h1 className="text-4xl sm:text-5xl font-bold leading-tight ">
+          <h1 className="text-4xl sm:text-5xl font-bold leading-tight font-[Playfair Display] ">
             Welcome to G.C.C.I
           </h1>
           <p className="text-xs text-gray-300">

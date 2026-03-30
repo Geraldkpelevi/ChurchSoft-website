@@ -55,7 +55,7 @@ export default function DailyQuote() {
   return (
     <section className="py-16 px-6 bg-gray-100">
       <div className="max-w-6xl mx-auto text-center mb-10">
-        <h2 className="text-3xl font-bold text-gray-800">
+        <h2 className="text-3xl font-bold text-blue-600">
           Daily Scripture
         </h2>
         <p className="text-gray-500 mt-2">

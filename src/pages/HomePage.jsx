@@ -4,8 +4,8 @@ import AboutSection from "../components/home/AboutSection";
 import CTASection from "../components/home/CTASection";
 import Hero from "../components/home/Hero";
 import LeadershipPreview from "../components/home/LeadershipPreview";
-import News from "../components/home/News";
-import UpcomingEvents from "./UpcomingEventsPage";
+import TrendingNews from "../components/home/TrendingNews";
+import UpcomingEvents from "./NewsPage";
 
 export default function HomePage() {
   return (
@@ -13,7 +13,7 @@ export default function HomePage() {
       <Hero />
       <AboutSection />
       <LeadershipPreview />
-      <News />
+      <TrendingNews />
       <UpcomingEvents />
       <CTASection />
       <ChurchesNearby />
