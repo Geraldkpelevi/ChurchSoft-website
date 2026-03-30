@@ -41,7 +41,7 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Great Commission Church International (G.C.C.I). All rights reserved.
+          &copy; {new Date().getFullYear()} FontTech_Soltions. All rights reserved.
         </div>
       </div>
     </footer>
