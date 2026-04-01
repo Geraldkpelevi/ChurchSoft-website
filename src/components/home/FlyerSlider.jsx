@@ -99,7 +99,7 @@ export default function FlyerSlider({ flyers, interval = 6000 }) {
   return (
     <section
       ref={sliderRef}
-      className="relative w-full overflow-hidden  shadow-2xl border border-gray-300/50 bg-gray-100"
+      className="relative w-full overflow-hidden lg:hidden block shadow-2xl border border-gray-300/50 bg-gray-100"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       tabIndex="0"
@@ -111,7 +111,7 @@ export default function FlyerSlider({ flyers, interval = 6000 }) {
 
       {/* Slider Container */}
       <div
-        className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] lg:h-[850px] xl:h-[520px] 2xl:h-[600px] overflow-hidden"
+        className="relative w-full h-[280px] sm:h-[470px] md:h-[500px] m-auto  overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >

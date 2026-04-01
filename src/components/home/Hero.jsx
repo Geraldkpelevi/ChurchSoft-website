@@ -123,10 +123,10 @@ export default function Hero() {
       <div className="relative z-20 w-full bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 border-t border-white/10 backdrop-blur-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 sm:py-4">
           {/* Ticker Label */}
-          <div className="flex-shrink-0 flex items-center gap-2 bg-yellow-500 text-black font-black text-xs sm:text-sm md:text-base rounded-full px-3 sm:px-4 py-2 whitespace-nowrap">
+          <div className="flex-shrink-0 flex items-center gap-2 bg-yellow-500 text-black font-black text-xs sm:text-xs md:text-base rounded-full px-3 sm:px-4 py-2 whitespace-nowrap">
             <span className="inline-block w-2 h-2 bg-black rounded-full animate-announcement-vibrate"></span>
             {/* <span className="hidden xs:inline">ANNOUNCEMENTS</span> */}
-            <span className="xs:hidden">ANNOUNCEMENTS 📢</span>
+            <span className="xs:hidden text-xs">ANNOUNCEMENTS 📢</span>
           </div>
 
           {/* Scrolling Content */}

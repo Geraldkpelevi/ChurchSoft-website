@@ -103,7 +103,7 @@ export default function DailyQuote() {
         </div>
       </div>
 
-      <div className="mt-6 text-center text-xs sm:text-sm text-blue-700 opacity-80">
+      <div className="mt-6 text-center text-xs sm:text-sm text-blue-700 opacity-80 hidden lg:block">
         <span className="font-semibold">Tip:</span> Hover to pause automatic
         rotation.
       </div>
