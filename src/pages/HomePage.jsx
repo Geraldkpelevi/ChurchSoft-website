@@ -1,5 +1,6 @@
 import ChurchesNearby from "../components/common/ChurchesNearby";
 import DailyQuote from "../components/common/DailyQuote";
+import FlyerSlider from "../components/home/FlyerSlider";
 import AboutSection from "../components/home/AboutSection";
 import CTASection from "../components/home/CTASection";
 import Hero from "../components/home/Hero";
@@ -13,6 +14,7 @@ export default function HomePage() {
       <AboutSection />
       <LeadershipPreview />
       <TrendingNews />
+      <FlyerSlider />
       <CTASection />
       <ChurchesNearby />
       <DailyQuote />

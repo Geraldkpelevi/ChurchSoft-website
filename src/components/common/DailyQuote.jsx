@@ -20,83 +20,92 @@ export default function DailyQuote() {
     },
   ];
 
-  // Add a clone of the first quote for infinite loop
-  const extendedQuotes = [...quotes, quotes[0]];
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Auto slide every 3 seconds
   useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
-      setIsTransitioning(true);
+      setCurrentIndex((prev) => (prev + 1) % quotes.length);
     }, 7000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused, quotes.length]);
 
-  // Handle the infinite loop reset
-  useEffect(() => {
-    if (currentIndex === quotes.length) {
-      // Wait for the transition to finish
-      const timeout = setTimeout(() => {
-        setIsTransitioning(false); // remove animation
-        setCurrentIndex(0); // jump to the real first slide
+  const nextQuote = () => setCurrentIndex((prev) => (prev + 1) % quotes.length);
+  const prevQuote = () =>
+    setCurrentIndex((prev) => (prev - 1 + quotes.length) % quotes.length);
 
-        // Re-enable transition for next slides
-        setTimeout(() => setIsTransitioning(true), 50);
-      }, 800); 
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, quotes.length]);
+  const activeQuote = quotes[currentIndex];
 
   return (
-    <section className="py-16 px-6 bg-gray-100">
-      <div className="max-w-6xl mx-auto text-center mb-10">
-        <h2 className="text-3xl font-bold text-blue-600">
-          Daily Scripture
+    <section className="py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 md:px-8 lg:px-10 bg-gradient-to-r from-blue-50 via-white to-blue-50">
+      <div className="max-w-6xl mx-auto text-center mb-8 sm:mb-10 md:mb-12">
+        <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-blue-700 opacity-80 mb-2">
+          Daily Inspiration
+        </p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-blue-900">
+          Scripture Quote of the Day
         </h2>
-        <p className="text-gray-500 mt-2">
-          Be encouraged by the Word of God
+        <p className="mt-3 text-sm sm:text-base md:text-lg text-blue-600 max-w-3xl mx-auto">
+          Receive a short encouragement each day from scripture and let God’s
+          word guide your steps.
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto relative overflow-hidden">
-        <div
-          className={`flex ${isTransitioning ? "transition-transform duration-800" : ""}`}
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}
-        >
-          {extendedQuotes.map((quote, index) => (
-            <div key={index} className="min-w-full px-4">
-              <div className="bg-white rounded-2xl shadow-md p-8 text-center">
-                <p className="text-lg text-gray-700 italic mb-4">
-                  "{quote.text}"
-                </p>
-                <h4 className="font-semibold text-blue-600">
-                  — {quote.verse}
-                </h4>
-              </div>
+      <div
+        className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-sm sm:shadow-md"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-100 opacity-20 pointer-events-none" />
+        <div className="p-6 sm:p-8 md:p-10 lg:p-12 relative">
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-slate-900 italic tracking-normal sm:tracking-tight leading-relaxed sm:leading-relaxed md:leading-relaxed">
+            “{activeQuote.text}”
+          </p>
+          <p className="mt-6 text-right text-base sm:text-lg md:text-xl font-bold text-blue-700">
+            — {activeQuote.verse}
+          </p>
+
+          <div className="mt-8 flex justify-between items-center gap-3">
+            <button
+              onClick={prevQuote}
+              className="rounded-full border border-blue-200 bg-white/90 px-4 py-2 sm:px-5 sm:py-2.5 font-medium text-blue-700 hover:bg-blue-50 transition duration-200"
+              aria-label="Previous quote"
+            >
+              ◀
+            </button>
+
+            <div className="flex gap-2">
+              {quotes.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`h-2 w-2 rounded-full transition-all duration-200 ${
+                    currentIndex === index
+                      ? "bg-blue-700 w-8 rounded-full"
+                      : "bg-blue-200"
+                  }`}
+                  aria-label={`Select quote ${index + 1}`}
+                />
+              ))}
             </div>
-          ))}
+
+            <button
+              onClick={nextQuote}
+              className="rounded-full border border-blue-200 bg-white/90 px-4 py-2 sm:px-5 sm:py-2.5 font-medium text-blue-700 hover:bg-blue-50 transition duration-200"
+              aria-label="Next quote"
+            >
+              ▶
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Indicators */}
-      <div className="flex justify-center mt-6 gap-2">
-        {quotes.map((_, index) => (
-          <div
-            key={index}
-            className={`h-2 w-2 rounded-full ${
-              currentIndex === index || (currentIndex === quotes.length && index === 0)
-                ? "bg-blue-600"
-                : "bg-gray-300"
-            }`}
-          />
-        ))}
+      <div className="mt-6 text-center text-xs sm:text-sm text-blue-700 opacity-80">
+        <span className="font-semibold">Tip:</span> Hover to pause automatic
+        rotation.
       </div>
     </section>
   );
