@@ -1,219 +1,243 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 
 const DEFAULT_FLYERS = [
-  "/images/GCCI1.jpeg",
-  "/images/GCCI2.jpeg",
-  "/images/GCCI3.jpeg",
-  "/images/GCCI4.jpeg",
-  "/images/GCCI5.jpeg",
+  "/images/GCCI6.jpeg",
+  "/images/GCCI7.jpeg",
+  "/images/GCCI8.jpeg",
+  "/images/GCCI9.jpeg",
+  "/images/GCCI10.jpeg",
+  "/images/GCCI11.jpeg",
+  "/images/GCCI12.jpeg",
+  "/images/GCCI13.jpeg",
+  "/images/GCCI14.jpeg",
+  "/images/GCCI15.jpeg",
+  "/images/GCCI16.jpeg",
+  "/images/GCCI17.jpeg",
+  "/images/GCCI18.jpeg",
+  "/images/GCCI20.jpeg",
+  "/images/GCCI21.jpeg",
+  "/images/GCCI22.jpeg",
+  "/images/GCCI23.jpeg",
 ];
 
 export default function FlyerSlider({ flyers, interval = 6000 }) {
   const sourceFlyers =
     Array.isArray(flyers) && flyers.length > 0 ? flyers : DEFAULT_FLYERS;
-  const activeFlyers = sourceFlyers.slice(0, 6);
+  const activeFlyers = sourceFlyers.slice(0, 19);
   const totalFlyers = activeFlyers.length;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
-  const [touchStart, setTouchStart] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
   const sliderRef = useRef(null);
+  const intervalRef = useRef(null);
 
   const extendedFlyers = useMemo(() => {
-    if (totalFlyers === 0) return [];
-    return [
-      ...activeFlyers,
-      activeFlyers[0],
-      activeFlyers[1] || activeFlyers[0],
-    ];
+    if (!totalFlyers) return [];
+    return [...activeFlyers, activeFlyers[0], activeFlyers[1] ?? activeFlyers[0]];
   }, [activeFlyers, totalFlyers]);
 
-  useEffect(() => {
-    if (!totalFlyers || isPaused) return undefined;
+  const goNext = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
+  }, []);
 
-    const slideInterval = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
-      setIsTransitioning(true);
-    }, interval);
+  const goPrev = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev === 0 ? totalFlyers - 1 : prev - 1));
+  }, [totalFlyers]);
 
-    return () => clearInterval(slideInterval);
-  }, [interval, totalFlyers, isPaused]);
+  const goToSlide = useCallback((index) => {
+    setIsTransitioning(true);
+    setCurrentIndex(index);
+  }, []);
 
+  // Reset loop when we reach cloned slides
   useEffect(() => {
     if (currentIndex >= totalFlyers) {
-      const resetTimer = setTimeout(() => {
+      const t = setTimeout(() => {
         setIsTransitioning(false);
         setCurrentIndex(0);
         setTimeout(() => setIsTransitioning(true), 50);
       }, 700);
-
-      return () => clearTimeout(resetTimer);
+      return () => clearTimeout(t);
     }
-
-    return undefined;
   }, [currentIndex, totalFlyers]);
 
+  // Auto-advance
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    if (!totalFlyers || isPaused) return;
+    intervalRef.current = setInterval(goNext, interval);
+    return () => clearInterval(intervalRef.current);
+  }, [interval, totalFlyers, isPaused, goNext]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    const onKey = (e) => {
       if (e.key === "ArrowLeft") goPrev();
       if (e.key === "ArrowRight") goNext();
     };
+    el.addEventListener("keydown", onKey);
+    return () => el.removeEventListener("keydown", onKey);
+  }, [goNext, goPrev]);
 
-    sliderRef.current?.addEventListener("keydown", handleKeyDown);
-    return () =>
-      sliderRef.current?.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  const handleTouchStart = (e) => setTouchStart(e.touches[0].clientX);
+
+  const handleTouchEnd = (e) => {
+    if (touchStart === null) return;
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      diff > 0 ? goNext() : goPrev();
+    }
+    setTouchStart(null);
+  };
 
   if (!totalFlyers) return null;
 
-  const goToSlide = (index) => {
-    setIsTransitioning(true);
-    setCurrentIndex(index);
-  };
-
-  const goPrev = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev === 0 ? totalFlyers - 1 : prev - 1));
-  };
-
-  const goNext = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
-  };
-
-  const handleTouchStart = (e) => {
-    setTouchStart(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e) => {
-    const touchEnd = e.changedTouches[0].clientX;
-    const diff = touchStart - touchEnd;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) goNext();
-      else goPrev();
-    }
-  };
-
-  const activeDot = currentIndex === totalFlyers ? 0 : currentIndex;
+  const activeDot = currentIndex >= totalFlyers ? 0 : currentIndex;
 
   return (
     <section
       ref={sliderRef}
-      className="relative w-full overflow-hidden lg:hidden block shadow-2xl border border-gray-300/50 bg-gray-100"
+      className="relative w-full overflow-hidden shadow-2xl bg-black"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      tabIndex="0"
+      tabIndex={0}
       role="region"
       aria-label="Event flyers carousel"
+      style={{ WebkitTapHighlightColor: "transparent" }}
     >
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none z-10" />
-
-      {/* Slider Container */}
+      {/* Slide track */}
       <div
-        className="relative w-full h-[280px] sm:h-[470px] md:h-[500px] m-auto  overflow-hidden"
+        className="relative w-full overflow-hidden"
+        style={{
+          /* 
+           * Responsive height using aspect ratio trick:
+           * aspect-ratio maintains perfect proportions on every screen.
+           * Fallback heights for older browsers.
+           */
+          aspectRatio: "4 / 3",
+          maxHeight: "80vh",
+        }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className={`flex h-full w-full ${
-            isTransitioning ? "transition-transform duration-700 ease-out" : ""
-          }`}
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          className="flex h-full"
+          style={{
+            width: `${extendedFlyers.length * 100}%`,
+            transform: `translateX(-${(currentIndex / extendedFlyers.length) * 100}%)`,
+            transition: isTransitioning
+              ? "transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+              : "none",
+            willChange: "transform",
+          }}
         >
           {extendedFlyers.map((flyer, index) => (
-            <div key={index} className="min-w-full h-full flex-shrink-0">
+            <div
+              key={index}
+              style={{ width: `${100 / extendedFlyers.length}%`, flexShrink: 0 }}
+              className="h-full"
+            >
               <img
                 src={flyer}
                 alt={`Event flyer ${(index % totalFlyers) + 1} of ${totalFlyers}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain bg-black"
                 loading={index < 2 ? "eager" : "lazy"}
+                draggable={false}
               />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Previous Button */}
+      {/* Side gradient vignettes */}
+      <div
+        className="absolute inset-y-0 left-0 w-12 pointer-events-none z-10"
+        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.35), transparent)" }}
+      />
+      <div
+        className="absolute inset-y-0 right-0 w-12 pointer-events-none z-10"
+        style={{ background: "linear-gradient(to left, rgba(0,0,0,0.35), transparent)" }}
+      />
+
+      {/* Prev arrow */}
       <button
         onClick={goPrev}
-        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/85 hover:bg-white text-blue-600 p-2 sm:p-3 shadow-lg hover:shadow-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 group"
-        aria-label="Previous event flyer"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full bg-white/85 hover:bg-white text-blue-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 group"
+        style={{ width: "clamp(32px, 6vw, 48px)", height: "clamp(32px, 6vw, 48px)" }}
+        aria-label="Previous flyer"
       >
         <svg
-          className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:-translate-x-1"
+          className="transition-transform group-hover:-translate-x-0.5"
+          style={{ width: "clamp(14px, 2.5vw, 22px)", height: "clamp(14px, 2.5vw, 22px)" }}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
 
-      {/* Next Button */}
+      {/* Next arrow */}
       <button
         onClick={goNext}
-        className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/85 hover:bg-white text-blue-600 p-2 sm:p-3 shadow-lg hover:shadow-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 group"
-        aria-label="Next event flyer"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center rounded-full bg-white/85 hover:bg-white text-blue-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 group"
+        style={{ width: "clamp(32px, 6vw, 48px)", height: "clamp(32px, 6vw, 48px)" }}
+        aria-label="Next flyer"
       >
         <svg
-          className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-1"
+          className="transition-transform group-hover:translate-x-0.5"
+          style={{ width: "clamp(14px, 2.5vw, 22px)", height: "clamp(14px, 2.5vw, 22px)" }}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
-      {/* Indicator Dots */}
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-4 sm:bottom-6 z-20 flex items-center gap-2 bg-black/20 backdrop-blur-sm rounded-full px-4 py-2">
-        {activeFlyers.map((_, index) => (
+      {/* Dot indicators */}
+      <div
+        className="absolute left-1/2 -translate-x-1/2 bottom-3 sm:bottom-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5"
+        style={{ background: "rgba(0,0,0,0.4)" }}
+      >
+        {activeFlyers.map((_, i) => (
           <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 ${
-              activeDot === index
-                ? "h-3 w-8 bg-white"
-                : "h-3 w-3 bg-white/60 hover:bg-white/80"
-            }`}
-            aria-label={`Go to flyer ${index + 1}`}
-            aria-current={activeDot === index ? "true" : "false"}
+            key={i}
+            onClick={() => goToSlide(i)}
+            aria-label={`Go to flyer ${i + 1}`}
+            aria-current={activeDot === i ? "true" : "false"}
+            className="rounded-full transition-all duration-300 focus:outline-none"
+            style={{
+              height: "10px",
+              width: activeDot === i ? "28px" : "10px",
+              background: activeDot === i ? "#ffffff" : "rgba(255,255,255,0.5)",
+            }}
           />
         ))}
       </div>
 
-      {/* Counter Badge */}
-      <div className="absolute top-4 sm:top-6 right-4 sm:right-6 z-20 rounded-lg bg-black/40 backdrop-blur-sm text-white text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 font-bold border border-white/20">
-        {activeDot + 1}/{totalFlyers}
+      {/* Counter badge */}
+      <div
+        className="absolute top-3 right-3 z-20 rounded-lg text-white font-bold border border-white/20 text-xs sm:text-sm px-3 py-1"
+        style={{ background: "rgba(0,0,0,0.45)" }}
+      >
+        {activeDot + 1} / {totalFlyers}
       </div>
 
-      {/* Play State Indicator */}
+      {/* Paused indicator */}
       {isPaused && (
-        <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-20 rounded-lg bg-black/40 backdrop-blur-sm text-white text-xs px-3 py-1.5 font-semibold border border-white/20">
-          ⏸ Paused
+        <div
+          className="absolute bottom-3 left-3 z-20 rounded-lg text-white text-xs font-semibold border border-white/20 px-3 py-1"
+          style={{ background: "rgba(0,0,0,0.45)" }}
+        >
+          Paused
         </div>
       )}
-
-      {/* Keyboard Navigation Hint (hidden by default) */}
-      <style>{`
-        @media (max-width: 640px) {
-          [role="region"]:focus-visible {
-            outline: 2px solid #2563eb;
-            outline-offset: 2px;
-          }
-        }
-      `}</style>
     </section>
   );
 }
