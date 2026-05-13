@@ -21,8 +21,11 @@ export default function Navbar() {
     {
       name: "Ministries",
       dropdown: [
-        { name: "Youth", path: "/ministries/youth" },
-        { name: "Women", path: "/ministries/women" },
+        { name: "Men", path: "/ministries/Men" },
+        { name: "Women", path: "/ministries/Women" },
+        { name: "Senior Youth", path: "/ministries/SY" },
+        { name: "Junior Youth", path: "/ministries/JY" },
+        { name: "children", path: "/ministries/children" },
       ],
     },
     { name: "Contact Us", path: "/contact" },
