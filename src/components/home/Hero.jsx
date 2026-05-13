@@ -82,7 +82,7 @@ export default function Hero() {
           );
         })}
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-blue-600/40 to-black/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-yellow-100/10 to-black/50"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-blue-900/40"></div>
       </div>
 
